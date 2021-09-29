@@ -1,0 +1,36 @@
+#!/bin/bash
+variable1_=$1_  # Rather than variable1=$1
+variable1=$1  
+# This will prevent an error, even if positional parameter is absent.
+
+echo "\$1 = $1"
+echo "variable1 = $variable1"
+echo "variable1_ = $variable1_"
+
+
+critical_argument01=$variable1_
+
+# The extra character can be stripped off later, like so.
+variable1_fixed=${variable1_/_/}
+echo "variable1_fixed = $variable1_fixed"
+# Side effects only if $variable1_ begins with an underscore.
+# This uses one of the parameter substitution templates discussed later.
+# (Leaving out the replacement pattern results in a deletion.)
+
+#  A more straightforward way of dealing with this is
+#+ to simply test whether expected positional parameters have been passed.
+
+
+#  However, as Fabian Kreutz points out,
+#+ the above method may have unexpected side-effects.
+#  A better method is parameter substitution:
+declare -i DefaultVal=10
+variable1_with_default=${1:-$DefaultVal}
+echo "variable1_with_default = $variable1_with_default"
+echo 
+if [ -z $1 ]
+then
+  echo "missing \$1"
+#  exit $E_MISSING_POS_PARAM
+fi
+exit

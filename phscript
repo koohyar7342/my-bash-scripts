@@ -1,0 +1,7 @@
+grep -i $* <<EOF
+moslem 09372597342
+arta 09920675288
+saman 0353-685489
+alireza 54786-258652
+sara 0125486352
+EOF
